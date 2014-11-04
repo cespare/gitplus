@@ -29,7 +29,7 @@ func main() {
 	}
 
 	gitOrFatal("submodule", "deinit", "-f", submodule)
-	gitOrFatal("rm", "-f", submodule)
+	gitOrFatal("rm", "-rf", submodule)
 
 	gitDir := gitOrFatal("rev-parse", "--show-toplevel")
 	if err := os.RemoveAll(filepath.Join(strings.TrimSpace(string(gitDir)), "modules", submodule)); err != nil {
@@ -45,7 +45,7 @@ the submodule is removed from git completely. It is equivalent to performing
 the following steps:
 
 1. git deinit -f path/to/submodule
-2. git rm -f path/to/submodule
+2. git rm -rf path/to/submodule
 3. rm -rf .git/modules/path/to/submodule
 
 git-rm-submodule uses git deinit (introduced in 1.8.3) and certain behavior
