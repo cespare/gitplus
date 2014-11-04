@@ -31,8 +31,13 @@ func main() {
 	gitOrFatal("submodule", "deinit", "-f", submodule)
 	gitOrFatal("rm", "-rf", submodule)
 
-	gitDir := gitOrFatal("rev-parse", "--show-toplevel")
-	if err := os.RemoveAll(filepath.Join(strings.TrimSpace(string(gitDir)), "modules", submodule)); err != nil {
+	topLevel := revParse("--show-toplevel")
+	subPath, err := submodulePath(topLevel, submodule)
+	if err != nil {
+		fatal(err)
+	}
+	modulePath := filepath.Join(revParse("--git-dir"), "modules", subPath)
+	if err := os.RemoveAll(modulePath); err != nil {
 		fatal(err)
 	}
 }
@@ -87,8 +92,20 @@ func gitVersion() ([3]int, error) {
 	return v, nil
 }
 
+func submodulePath(toplevel, sub string) (string, error) {
+	abs, err := filepath.Abs(sub)
+	if err != nil {
+		return "", err
+	}
+	return filepath.Rel(toplevel, abs)
+}
+
 func git(args ...string) (output []byte, err error) {
 	return exec.Command("git", args...).CombinedOutput()
+}
+
+func revParse(arg string) string {
+	return strings.TrimSpace(string(gitOrFatal("rev-parse", arg)))
 }
 
 func gitOrFatal(args ...string) []byte {
