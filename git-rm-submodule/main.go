@@ -49,7 +49,7 @@ This command will deinit a submodule and delete all associated files such that
 the submodule is removed from git completely. It is equivalent to performing
 the following steps:
 
-1. git deinit -f path/to/submodule
+1. git submodule deinit -f path/to/submodule
 2. git rm -rf path/to/submodule
 3. rm -rf .git/modules/path/to/submodule
 
