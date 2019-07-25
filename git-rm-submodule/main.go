@@ -57,8 +57,7 @@ git-rm-submodule uses git deinit (introduced in 1.8.3) and certain behavior
 of git add changed in 1.8.5, so it fails unless git has version at least
 1.8.5.
 
-Note that you will probably want to commit these changes afterwards.
-`)
+Note that you will probably want to commit these changes afterwards.`)
 	os.Exit(129) // 129 is used by git commands for -h or incorrect usage
 }
 
