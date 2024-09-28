@@ -1,5 +1,4 @@
-# githelpers
+# gitplus
 
-Simple helper tools to augment git, making common tasks easier.
-
-WIP.
+Gitplus is a collection of helper tools to augment git, making certain workflows
+and common tasks easier.
