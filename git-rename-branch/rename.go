@@ -153,7 +153,7 @@ func currentBranch(logger *log.Logger) (string, error) {
 	return branch, nil
 }
 
-func runGit(logger *log.Logger, cmd string, args ...string) (string, *gitError) {
+func runGit(logger *log.Logger, cmd string, args ...string) (string, error) {
 	fullCmd := slices.Concat([]string{"git", cmd}, args)
 	logger.Printf("> %s", strings.Join(fullCmd, " "))
 	out, err := exec.Command("git", fullCmd[1:]...).Output()
