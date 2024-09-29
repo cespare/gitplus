@@ -13,15 +13,16 @@ import (
 	"strings"
 )
 
-func main() {
-	log.SetFlags(0)
-	verbose := flag.Bool("v", false, "Verbose mode")
-	flag.Usage = func() {
+func cmdRenameBranch(args []string) {
+	fs := flag.NewFlagSet("rename-branch", flag.ExitOnError)
+	verbose := fs.Bool("v", false, "Verbose mode")
+	fs.Usage = func() {
 		fmt.Fprint(os.Stderr, `usage: git rename-branch [flags...] [old-name] <new-name>
 
 Flags:
+
 `)
-		flag.PrintDefaults()
+		fs.PrintDefaults()
 		fmt.Fprint(os.Stderr, `
 This command renames a local branch using 'git branch -m'. Then it renames a
 remote tracking branch, if any.
@@ -29,18 +30,18 @@ remote tracking branch, if any.
 If old-name is not given, rename-branch renames the current branch.
 `)
 	}
-	flag.Parse()
+	fs.Parse(args)
 
 	var oldName, newName string
-	switch flag.NArg() {
+	switch fs.NArg() {
 	case 1:
-		newName = flag.Arg(0)
+		newName = fs.Arg(0)
 	case 2:
-		oldName = flag.Arg(0)
-		newName = flag.Arg(1)
+		oldName = fs.Arg(0)
+		newName = fs.Arg(1)
 	default:
 		log.Println("Need one or two branch names")
-		flag.Usage()
+		fs.Usage()
 		os.Exit(129)
 	}
 
