@@ -50,6 +50,10 @@ var commands = map[string]command{
 		desc: "rename a local branch along with its tracking branch",
 		run:  cmdRenameBranch,
 	},
+	"repush": {
+		desc: "rebase, merge, and push a feature branch, with retries",
+		run:  cmdRepush,
+	},
 }
 
 func usage() {
