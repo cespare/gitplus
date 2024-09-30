@@ -28,3 +28,13 @@ instead.
 You can rename a local branch with `git branch -m`, but if it has a tracking
 branch you usually want to rename that too. `git rename-branch` renames a local
 branch as well as the remote tracking branch (if it has the same name).
+
+## TODO
+
+* `repush`: rebase and push (in a loop)
+  - And delete local branch?
+  - And delete remote branch? (GH can do this automatically, but it isn't on by default)
+* `chain`: print a chain of branches
+* `chain-push`: push all the branches in the chain with remote tracking branches
+* `chain-repush`: repush the bottom-most branch of the chain; rebase the rest
+* All the chain stuff works in tandem with `git rebase --update-refs`
