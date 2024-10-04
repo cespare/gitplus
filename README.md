@@ -31,6 +31,7 @@ branch as well as the remote tracking branch (if it has the same name).
 
 ## TODO
 
+* `rename-branch` shouldn't push to the remote when it renames it
 * `repush`: rebase and push (in a loop)
   - And delete local branch?
   - And delete remote branch? (GH can do this automatically, but it isn't on by default)
