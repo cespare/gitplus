@@ -127,7 +127,7 @@ func rename(logger *log.Logger, oldName, newName string) error {
 	if err != nil {
 		return err
 	}
-	_, err = runGit(logger, "push", "-u", remote, "-u", newName+":"+newName)
+	_, err = runGit(logger, "push", "-u", remote, newName+":"+newName)
 	if err != nil {
 		return err
 	}
